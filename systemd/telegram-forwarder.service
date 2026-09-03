@@ -1,0 +1,28 @@
+[Unit]
+Description=Telegram Private Channel File Forwarder
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=forwarder
+Group=forwarder
+WorkingDirectory=/opt/telegram-forwarder
+# .env is loaded by the app itself (python-dotenv) from WorkingDirectory —
+# no EnvironmentFile= needed here.
+ExecStart=/opt/telegram-forwarder/venv/bin/python /opt/telegram-forwarder/main.py
+
+Restart=always
+RestartSec=10
+StartLimitIntervalSec=0
+
+# Basic hardening. ProtectSystem=full makes most of the filesystem
+# read-only, so the paths the app actually writes to must be listed here.
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=full
+ProtectHome=true
+ReadWritePaths=/opt/telegram-forwarder/data /opt/telegram-forwarder/logs
+
+[Install]
+WantedBy=multi-user.target
