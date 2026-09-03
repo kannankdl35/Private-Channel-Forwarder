@@ -1,0 +1,28 @@
+# Environment / secrets
+.env
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.venv/
+venv/
+env/
+
+# Telethon file-based session artifacts (not used by default, but ignored
+# in case a contributor switches from SESSION_STRING to a file session)
+*.session
+*.session-journal
+
+# Runtime data (dedupe DB, resume state)
+data/*.db
+data/*.db-*
+
+# Logs
+logs/*.log
+logs/*.log.*
+
+# OS
+.DS_Store
+Thumbs.db
